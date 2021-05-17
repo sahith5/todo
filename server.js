@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+const path=process.env.PORT||3000;
 
 
 app.use(express.urlencoded({extended:true}));
@@ -39,7 +40,7 @@ app.get("/get",function(req,res)
     res.json(tasks);
 })
 
-app.listen(3000,function()
+app.listen(path,function()
 {
     console.log("server started ")
 })
