@@ -40,12 +40,12 @@ function add()
     var space=document.querySelector("#space");
     $.ajax({
         type:"post",
-        url:"https://todo-project2.herokuapp.com/post",
+        url:"https://todo-project2.herokuapp.com/users",
         data:{task:task.value},
         
         success:function(datax){
             console.log(datax);
-        var idx=JSON.parse(datax.id);
+        var idx=JSON.parse(datax._id);
 
         var x=`<div id="${idx}">
 
@@ -73,7 +73,7 @@ function del(idx)
     $.ajax(
         {
             type:"delete",
-            url:"https://todo-project2.herokuapp.com/del/"+idx,
+            url:"https://todo-project2.herokuapp.com/users/"+idx,
             success:function(data)
             {
               console.log("deleted");
@@ -88,18 +88,18 @@ function get()
 {
     $.ajax({
         type:"get",
-        url:"https://todo-project2.herokuapp.com/get",
+        url:"https://todo-project2.herokuapp.com/users",
         success:function(datax)
         {
         for(var i=0;i<datax.length;i++)
         {
-            var x=`<div id="${datax[i].id}">
+            var x=`<div id="${datax[i]._id}">
 
-                <div id ="text${datax[i].id} class="text">
+                <div id ="text${datax[i]._id} class="text">
                 ${datax[i].task}
                 </div>
 
-                <button onclick=del(${datax[i].id})>delete</button>
+                <button onclick=del(${datax[i]._id})>delete</button>
                 </div>`
                 $('#space').append(x);
         }

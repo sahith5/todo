@@ -1,5 +1,18 @@
+
 const express=require('express');
+const mongoose=require('mongoose');
+const user_lib=require('./libs/user_libs.js');
 const app=express();
+const password=process.env.password;
+
+const connectionstring="mongodb+srv://sahith:"+password+"@cluster0.jivxp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const dboptions={useUnifiedTopology:true}
+
+mongoose.connect(connectionstring,dboptions,function()
+{
+    console.log("db connected");   
+});
+
 const path=process.env.PORT||3000;
 
 
@@ -35,10 +48,23 @@ app.delete('/del/:id',function(req,res)
 
 })
 
-app.get("/get",function(req,res)
-{
-    res.json(tasks);
-})
+
+
+app.get("/users",user_lib.get);
+
+
+app.post("/users",user_lib.post);
+
+
+app.get("/getuser/:id",user_lib.getuser);
+
+
+app.put("/users/:id",user_lib.up)
+
+
+app.delete("/users/:id",user_lib.del);
+
+
 
 app.listen(path,function()
 {
