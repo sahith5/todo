@@ -28,7 +28,7 @@
     <h1 style="width: max-content;margin: 13px auto;">TODO</h1>
     <input type="text" name="task" id="task" placeholder="tasks" style="text-align: center; width: 200px; " >
     <button id="add" onclick=add()>add</button>
-    <div id="space">
+    <div id="space" >
 
     </div>
 </div>
@@ -45,14 +45,14 @@ function add()
         
         success:function(datax){
             console.log(datax);
-        var idx=JSON.parse(datax._id);
+            var idx=datax["_id"];
+            console.log(idx);
 
-        var x=`<div id="${idx}">
+        var x=`<div id="row${idx}">
 
-                <div id ="text${idx} class="text">
+                <div id ="text${datax["_id"]} class="text">
                 ${task.value}
                 </div>
-
                 <button onclick=del(${idx})>delete</button>
                 </div>`
         $('#space').append(x);
@@ -67,9 +67,15 @@ function add()
 
 }
 
+
+
 function del(idx)
 {
-    $('#'+idx).remove();
+  idx=idx.id;
+    console.log("pressesd");
+
+    $('#row'+idx).remove()
+
     $.ajax(
         {
             type:"delete",
@@ -93,13 +99,15 @@ function get()
         {
         for(var i=0;i<datax.length;i++)
         {
-            var x=`<div id="${datax[i]._id}">
+            var id=datax[i]._id;
+            id.toString()
+
+            var x=`<div id="row${datax[i]._id}">
 
                 <div id ="text${datax[i]._id} class="text">
                 ${datax[i].task}
                 </div>
-
-                <button onclick=del(${datax[i]._id})>delete</button>
+                <button  id="${datax[i]._id}"  onclick=del(this)>delete</button>
                 </div>`
                 $('#space').append(x);
         }
