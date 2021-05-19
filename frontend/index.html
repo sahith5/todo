@@ -40,7 +40,9 @@ function add()
     var space=document.querySelector("#space");
     $.ajax({
         type:"post",
-        url:"https://todo-project2.herokuapp.com/users",
+//
+
+        url:"http://localhost:3000/users",
         data:{task:task.value},
         
         success:function(datax){
@@ -53,7 +55,7 @@ function add()
                 <div id ="text${datax["_id"]} class="text">
                 ${task.value}
                 </div>
-                <button onclick=del(${idx})>delete</button>
+                <button   id="${datax["_id"]}" onclick=del(this)>delete</button>
                 </div>`
         $('#space').append(x);
 
@@ -79,7 +81,7 @@ function del(idx)
     $.ajax(
         {
             type:"delete",
-            url:"https://todo-project2.herokuapp.com/users/"+idx,
+            url:"http://localhost:3000/users/"+idx,
             success:function(data)
             {
               console.log("deleted");
@@ -94,7 +96,7 @@ function get()
 {
     $.ajax({
         type:"get",
-        url:"https://todo-project2.herokuapp.com/users",
+        url:"http://localhost:3000/users",
         success:function(datax)
         {
         for(var i=0;i<datax.length;i++)
