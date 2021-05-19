@@ -42,7 +42,7 @@ function add()
         type:"post",
 //
 
-        url:"http://localhost:3000/users",
+        url:"https://todo-project2.herokuapp.com/users",
         data:{task:task.value},
         
         success:function(datax){
@@ -81,7 +81,7 @@ function del(idx)
     $.ajax(
         {
             type:"delete",
-            url:"http://localhost:3000/users/"+idx,
+            url:"https://todo-project2.herokuapp.com/users/"+idx,
             success:function(data)
             {
               console.log("deleted");
@@ -96,7 +96,7 @@ function get()
 {
     $.ajax({
         type:"get",
-        url:"http://localhost:3000/users",
+        url:"https://todo-project2.herokuapp.com/users",
         success:function(datax)
         {
         for(var i=0;i<datax.length;i++)
